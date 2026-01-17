@@ -10,7 +10,7 @@
         queue.Enqueue(100);
         var value = queue.Dequeue();
         Console.WriteLine(value);
-        // Defect(s) Found:
+        // Defect(s) Found: []
 
         Console.WriteLine("------------");
 
@@ -28,7 +28,7 @@
         Console.WriteLine(value);
         value = queue.Dequeue();
         Console.WriteLine(value);
-        // Defect(s) Found: 
+        // Defect(s) Found: []
 
         Console.WriteLine("------------");
 
@@ -44,7 +44,7 @@
         catch (IndexOutOfRangeException) {
             Console.WriteLine("I got the exception as expected.");
         }
-        // Defect(s) Found: 
+        // Defect(s) Found: Theres no value to remove or dequeue so []
     }
 
     private readonly List<int> _queue = new();
@@ -54,7 +54,9 @@
     /// </summary>
     /// <param name="value">Integer value to add to the queue</param>
     private void Enqueue(int value) {
-        _queue.Insert(0, value);
+        _queue.Add(value);   // Error here - Its adding to the front of the queue with .Insert
+                                // It should be adding to the end of the queue with .Add
+                                // Also the index in Dequeue is wrong, it must be removed ex (0, value)
     }
 
     /// <summary>
@@ -66,8 +68,8 @@
         if (_queue.Count <= 0)
             throw new IndexOutOfRangeException();
 
-        var value = _queue[1];
-        _queue.RemoveAt(1);
+        var value = _queue[0]; // error - should be index 0 not 1. computers always start at 0!
+        _queue.RemoveAt(0);
         return value;
     }
 }
