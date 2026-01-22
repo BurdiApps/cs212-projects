@@ -36,6 +36,7 @@
         var valuesSeen = new HashSet<int>();
         foreach (var n in numbers)
         {
+            // -20, -15, -10, -5, 0, 5, 10, 15, 20
             // If 10-n is in the values_seen set then I know that
             // I have previously seen a number that will sum with n 
             // to equal 10. Print out that pair
