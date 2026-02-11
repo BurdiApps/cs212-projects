@@ -11,7 +11,11 @@ public class Node
 
     public void Insert(int value)
     {
-        // TODO Start Problem 1
+        if (value == Data)
+        {
+            // Duplicates are not allowed in the BST
+            return;
+        }
 
         if (value < Data)
         {
@@ -33,13 +37,25 @@ public class Node
 
     public bool Contains(int value)
     {
-        // TODO Start Problem 2
-        return false;
+        if (value == Data)
+            return true;
+
+        if (value < Data)
+        {
+            // Search the left subtree
+            return Left != null && Left.Contains(value);
+        }
+        else
+        {
+            // Search the right subtree
+            return Right != null && Right.Contains(value);
+        }
     }
 
     public int GetHeight()
     {
-        // TODO Start Problem 4
-        return 0; // Replace this line with the correct return statement(s)
+        int leftHeight = Left?.GetHeight() ?? 0;
+        int rightHeight = Right?.GetHeight() ?? 0;
+        return 1 + Math.Max(leftHeight, rightHeight);
     }
 }
